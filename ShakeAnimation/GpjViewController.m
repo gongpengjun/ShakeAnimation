@@ -9,6 +9,7 @@
 #import "GpjViewController.h"
 
 @interface GpjViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *loginView;
 
 @end
 
@@ -24,6 +25,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)loginButtonAction:(id)sender
+{
+    [self shakeLoginFormView];
+}
+
+- (void)shakeLoginFormView
+{
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = @"position.x";
+    animation.values = @[ @0, @10, @-10, @10, @0 ];
+    animation.keyTimes = @[ @0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1 ];
+    animation.duration = 0.4;
+    
+    animation.additive = YES;
+    
+    [_loginView.layer addAnimation:animation forKey:@"shake"];
 }
 
 @end
